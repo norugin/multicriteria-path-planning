@@ -1,0 +1,6 @@
+{
+  "worker_processes": 8,
+  "pair_tasks": 300,
+  "method_runs": 1500,
+  "wall_runtime_s": 2440.099923698999
+}

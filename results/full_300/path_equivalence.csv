@@ -1,0 +1,13 @@
+﻿map,candidate,other_method,comparable_paths,identical_paths,identical_percent
+complex,Astar-L-Psi-K,Astar-L,100,4,4.0
+complex,Astar-L-Psi-K,Astar-L-S,74,0,0.0
+complex,Astar-L-Psi-K,Astar-L-K,100,88,88.0
+complex,Astar-L-Psi-K,Astar-L-Psi,100,12,12.0
+labyrinth,Astar-L-Psi-K,Astar-L,100,5,5.0
+labyrinth,Astar-L-Psi-K,Astar-L-S,82,0,0.0
+labyrinth,Astar-L-Psi-K,Astar-L-K,100,93,93.0
+labyrinth,Astar-L-Psi-K,Astar-L-Psi,100,18,18.0
+simple,Astar-L-Psi-K,Astar-L,100,3,3.0
+simple,Astar-L-Psi-K,Astar-L-S,84,0,0.0
+simple,Astar-L-Psi-K,Astar-L-K,100,87,87.0
+simple,Astar-L-Psi-K,Astar-L-Psi,100,17,17.0

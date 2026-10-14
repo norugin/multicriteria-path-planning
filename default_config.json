@@ -1,0 +1,30 @@
+{
+  "bounds_m": [250.0, 250.0, 100.0],
+  "grid_step_m": 5.0,
+  "heading_count": 16,
+  "minimum_turn_radius_m": 15.0,
+  "safety_clearance_m": 5.0,
+  "length_scale_m": 5.0,
+  "weights": {
+    "Astar-L": [1.0, 0.0, 0.0],
+    "Astar-L-Psi": [0.7, 0.3, 0.0],
+    "Astar-L-K": [0.7, 0.0, 0.3],
+    "Astar-L-Psi-K": [0.5, 0.3, 0.2]
+  },
+  "map_seeds": {
+    "simple": 1103,
+    "complex": 2207,
+    "labyrinth": 3301
+  },
+  "pair_seed": 20260919,
+  "minimum_pair_distance_m": 150.0,
+  "edge_samples": 3,
+  "max_expansions": 500000,
+  "kinematic_mode": "heading_aligned",
+  "spatial_neighbor_radius_cells": 2,
+  "maximum_heading_step_change": 2,
+  "smoothing": {
+    "corner_fraction": 0.30,
+    "samples_per_corner": 8
+  }
+}

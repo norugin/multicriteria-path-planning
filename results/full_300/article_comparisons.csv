@@ -1,0 +1,10 @@
+﻿baseline,candidate,metric,comparable_paths,identical_paths,identical_percent,n,W_plus,z,p_one_sided,p_method
+Astar-L,Astar-L-Psi-K,course_change_rad,300,12,4.0,296,43956.0,14.981224675121707,4.87027341987719e-51,normal
+Astar-L,Astar-L-Psi-K,curvature_integral_inv_m,300,12,4.0,298,44551.0,14.962248901840084,6.478614900276396e-51,normal
+Astar-L,Astar-L-Psi-K,normalized_criterion,300,12,4.0,298,44551.0,14.962240463348037,6.47943655631628e-51,normal
+Astar-L-Psi,Astar-L-Psi-K,course_change_rad,300,47,15.666666666666666,105,5565.0,10.598335565889595,1.5166526951634888e-26,normal
+Astar-L-Psi,Astar-L-Psi-K,curvature_integral_inv_m,300,47,15.666666666666666,267,35778.0,14.164787234146585,7.566227107295745e-46,normal
+Astar-L-Psi,Astar-L-Psi-K,normalized_criterion,300,47,15.666666666666666,267,35778.0,14.164443646785163,7.603322677685771e-46,normal
+Astar-L-K,Astar-L-Psi-K,course_change_rad,300,268,89.33333333333333,11,66.0,3.2459451013529947,0.00048828125,exact
+Astar-L-K,Astar-L-Psi-K,curvature_integral_inv_m,300,268,89.33333333333333,25,162.0,0.0,0.5105917453765869,exact
+Astar-L-K,Astar-L-Psi-K,normalized_criterion,300,268,89.33333333333333,25,325.0,4.4217919858134085,2.9802322387695312e-08,exact
