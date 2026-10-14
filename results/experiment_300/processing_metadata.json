@@ -1,0 +1,17 @@
+{
+  "source": "results/search_300",
+  "source_search_runs_retained": 1200,
+  "postprocessing_runs_recomputed": 300,
+  "quintic_samples": 16,
+  "bootstrap_repetitions": 10000,
+  "bootstrap_seed": 20261014,
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "timing_note": "Search and smoothing timings were measured in separate runs; total runtime is unavailable.",
+  "source_sha256": {
+    "raw_runs.csv": "d82744bd9c8bb79a6536a0984c05222f5edb08b791485fabf00094f32ed13e39",
+    "paths.ndjson.gz": "e89de993441ee107417330d6e8bf0153a31cb1a30e351a78cf46593681ec1ced",
+    "maps.json": "0de63758f1b9a76c6e8413cef9310cd1d3203ff9dcd1352bf6185b7aa1ce16f0",
+    "pairs.csv": "95840524d270f739868995ef4fa6039fa895336d9108a765db850bc31a8818e5"
+  }
+}

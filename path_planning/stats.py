@@ -8,7 +8,7 @@ from collections import defaultdict
 METRICS = [
     "length_m",
     "course_change_rad",
-    "curvature_integral_inv_m",
+    "heading_penalty_inv_m",
     "normalized_criterion",
     "runtime_s",
     "expanded",
@@ -148,7 +148,7 @@ def paired_comparisons(
         pair_ids = sorted({row["pair_id"] for row in rows if row["map"] == map_name})
         for metric in [
             "course_change_rad",
-            "curvature_integral_inv_m",
+            "heading_penalty_inv_m",
             "normalized_criterion",
             "length_m",
         ]:
@@ -183,7 +183,7 @@ def pairwise_deltas(
     metrics = [
         "length_m",
         "course_change_rad",
-        "curvature_integral_inv_m",
+        "heading_penalty_inv_m",
         "normalized_criterion",
         "runtime_s",
         "expanded",

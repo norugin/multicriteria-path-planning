@@ -136,7 +136,7 @@ def run_pair(task: tuple[str, int, State, State, list[str]]) -> dict:
             "path_sha256": "",
             "length_m": math.nan,
             "course_change_rad": math.nan,
-            "curvature_integral_inv_m": math.nan,
+            "heading_penalty_inv_m": math.nan,
             "normalized_criterion": math.nan,
         }
         if result.status == "ok":

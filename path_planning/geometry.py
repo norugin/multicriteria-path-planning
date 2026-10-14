@@ -118,20 +118,17 @@ class WorldMap:
             obstacle.contains(point) for obstacle in self.inflated_obstacles
         )
 
-    def segment_free(self, a: Point3, b: Point3, sample_count: int = 3) -> bool:
-        # sample_count remains in the public signature for compatibility with
-        # the experiment configuration; collision testing is exact.
-        del sample_count
+    def segment_free(self, a: Point3, b: Point3) -> bool:
         if not self.point_free(a) or not self.point_free(b):
             return False
         return not any(
             obstacle.intersects_segment(a, b) for obstacle in self.inflated_obstacles
         )
 
-    def polyline_free(self, points: Iterable[Point3], sample_count: int = 5) -> bool:
+    def polyline_free(self, points: Iterable[Point3]) -> bool:
         points = list(points)
         return all(
-            self.segment_free(points[i - 1], points[i], sample_count)
+            self.segment_free(points[i - 1], points[i])
             for i in range(1, len(points))
         )
 

@@ -1,7 +1,6 @@
-"""Geometric postprocessing preserving both boundary positions and courses.
+"""Smooth configuration paths with fixed endpoint positions and headings.
 
-Validity is checked on the returned sampled configuration path. No continuous
-spatial curvature bound or robot dynamic feasibility is claimed.
+Each returned transition is checked for collisions and heading constraints.
 """
 from __future__ import annotations
 
@@ -23,9 +22,9 @@ def configuration_edge_valid(a: Configuration, b: Configuration, world: WorldMap
     if length <= 1e-12:
         return False
     change = angular_distance(heading_a, heading_b)
-    if change > length / config.minimum_turn_radius_m + 1e-12:
+    if change > length / config.heading_change_length_m + 1e-12:
         return False
-    if config.kinematic_mode == "heading_aligned" and math.hypot(q[0] - p[0], q[1] - p[1]) > 1e-12:
+    if config.heading_constraint_mode == "heading_aligned" and math.hypot(q[0] - p[0], q[1] - p[1]) > 1e-12:
         mean = heading_a + 0.5 * wrap_angle(heading_b - heading_a)
         if angular_distance(horizontal_course(p, q), mean) > 0.51 * config.heading_step_rad + 1e-12:
             return False
@@ -63,7 +62,7 @@ def quintic_configurations(a: Configuration, b: Configuration, samples: int) -> 
     For t in [0, 1], endpoint second derivatives are zero. Endpoint derivative
     horizontal magnitude is the chord's horizontal length; vertical derivative
     equals its vertical displacement. Interior courses use derivative azimuths.
-    A vertical segment uses circular interpolation of its specified courses.
+    A vertical segment interpolates heading along the shortest angular interval.
     """
     p, ha = a
     q, hb = b
@@ -109,6 +108,6 @@ def postprocess_configurations(path: list[Configuration], world: WorldMap,
             output.extend(proposal[1:])
             accepted += 1
         else:
-            # Keep the admissible shortened edge instead of dropping this task.
+            # Retain the admissible straight transition.
             output.append(b)
     return PostprocessResult(output, len(shortened) - 1, accepted, len(shortened) - 1 - accepted)

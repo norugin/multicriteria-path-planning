@@ -55,13 +55,13 @@ class AStarPlanner:
                     next_heading = (heading_index + dh) % self.config.heading_count
                     target = (dx, dy, dz, next_heading)
                     dpsi = abs(dh) * self.heading_step
-                    curvature = 0.0 if dpsi == 0 else dpsi * dpsi / length
-                    if dpsi > 0 and length / dpsi + 1e-12 < self.config.minimum_turn_radius_m:
+                    heading_penalty = 0.0 if dpsi == 0 else dpsi * dpsi / length
+                    if dpsi > 0 and length / dpsi + 1e-12 < self.config.heading_change_length_m:
                         continue
                     if not self._heading_aligned(source, target):
                         continue
                     heading_templates.append(
-                        (dx, dy, dz, next_heading, (length, dpsi, curvature))
+                        (dx, dy, dz, next_heading, (length, dpsi, heading_penalty))
                     )
             templates.append(heading_templates)
         return templates
@@ -90,7 +90,7 @@ class AStarPlanner:
         value = self._edge_free_cache.get(key)
         if value is None:
             value = self.world.segment_free(
-                self.point(a), self.point(b), self.config.edge_samples
+                self.point(a), self.point(b)
             )
             self._edge_free_cache[key] = value
         return value
@@ -98,11 +98,11 @@ class AStarPlanner:
     def edge_metrics(self, a: State, b: State) -> tuple[float, float, float]:
         length = distance(self.point(a), self.point(b))
         dpsi = angular_distance(self.heading(a), self.heading(b))
-        curvature_integral = 0.0 if dpsi == 0 else dpsi * dpsi / length
-        return length, dpsi, curvature_integral
+        heading_penalty = 0.0 if dpsi == 0 else dpsi * dpsi / length
+        return length, dpsi, heading_penalty
 
     def _heading_aligned(self, a: State, b: State) -> bool:
-        if self.config.kinematic_mode != "heading_aligned":
+        if self.config.heading_constraint_mode != "heading_aligned":
             return True
         pa, pb = self.point(a), self.point(b)
         if abs(pb[0] - pa[0]) + abs(pb[1] - pa[1]) < 1e-12:
@@ -125,12 +125,12 @@ class AStarPlanner:
             yield next_state, metrics
 
     def edge_cost(self, edge: tuple[float, float, float], method: str) -> float:
-        length, dpsi, curvature = edge
+        length, dpsi, heading_penalty = edge
         alpha, beta, gamma = self.config.weights[method]
         return (
             alpha * length / self.config.length_scale_m
             + beta * dpsi / math.pi
-            + gamma * curvature / self.config.curvature_scale_inv_m
+            + gamma * heading_penalty / self.config.heading_penalty_scale_inv_m
         )
 
     def heuristic(self, state: State, goal: State, method: str) -> float:

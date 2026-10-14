@@ -1,0 +1,14 @@
+{
+  "worker_processes": 8,
+  "pair_tasks": 300,
+  "wall_runtime_s": 2440.099923698999,
+  "source_method_runs": 1500,
+  "included_method_runs": 1200,
+  "included_methods": [
+    "Astar-L",
+    "Astar-L-Psi",
+    "Astar-L-K",
+    "Astar-L-Psi-K"
+  ],
+  "wall_runtime_scope": "Source run, including the smoothing variant not used as an input to path processing."
+}

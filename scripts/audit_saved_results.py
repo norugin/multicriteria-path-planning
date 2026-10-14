@@ -1,4 +1,4 @@
-"""Audit path/CSV consistency and admissibility of the reviewed experiment."""
+"""Check stored path metrics, endpoint configurations and admissible transitions."""
 from __future__ import annotations
 import argparse
 import csv
@@ -19,7 +19,7 @@ from path_planning.postprocess import configuration_edge_valid, configuration_pa
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("results", nargs="?", default="results/reviewed_300")
+    p.add_argument("results", nargs="?", default="results/experiment_300")
     args = p.parse_args()
     root = Path(args.results)
     config = load_config(root / "core_config.json")

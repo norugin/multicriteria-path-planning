@@ -16,7 +16,7 @@ from path_planning.stats import wilcoxon_greater
 METRICS = (
     "length_m",
     "course_change_rad",
-    "curvature_integral_inv_m",
+    "heading_penalty_inv_m",
     "normalized_criterion",
     "runtime_s",
 )
@@ -90,7 +90,7 @@ def article_comparisons(rows: list[dict[str, str]]) -> list[dict]:
             base["path_sha256"] == candidate["path_sha256"]
             for base, candidate in comparable
         )
-        for metric in ("course_change_rad", "curvature_integral_inv_m", "normalized_criterion"):
+        for metric in ("course_change_rad", "heading_penalty_inv_m", "normalized_criterion"):
             differences = [float(base[metric]) - float(candidate[metric]) for base, candidate in comparable]
             result = wilcoxon_greater(differences)
             output.append(
@@ -109,7 +109,7 @@ def article_comparisons(rows: list[dict[str, str]]) -> list[dict]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build the aggregate tables used in the article")
-    parser.add_argument("results", nargs="?", default="results/full_300")
+    parser.add_argument("results", nargs="?", default="results/search_300")
     args = parser.parse_args()
     results = Path(args.results)
     rows = read_csv(results / "raw_runs.csv")

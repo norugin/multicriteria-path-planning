@@ -3,7 +3,6 @@ import unittest
 
 from path_planning.config import ExperimentConfig
 from path_planning.geometry import Box, WorldMap
-from path_planning.metrics import minimum_polyline_turn_radius, polyline_metrics, smooth_path
 from path_planning.planner import AStarPlanner
 from path_planning.stats import pairwise_deltas, wilcoxon_greater
 from path_planning.postprocess import configuration_edge_valid, configuration_path_metrics, postprocess_configurations
@@ -15,13 +14,13 @@ class MultiCriteriaExperimentTests(unittest.TestCase):
             bounds_m=(30.0, 30.0, 10.0),
             grid_step_m=5.0,
             heading_count=16,
-            minimum_turn_radius_m=15.0,
+            heading_change_length_m=15.0,
             safety_clearance_m=0.0,
             minimum_pair_distance_m=10.0,
             max_expansions=50000,
         )
 
-    def test_recovered_cost_formula(self):
+    def test_edge_cost(self):
         world = WorldMap("empty", self.config.bounds_m, [], 0.0)
         planner = AStarPlanner(world, self.config)
         edge = (5.0, 0.0, 0.0)
@@ -38,7 +37,7 @@ class MultiCriteriaExperimentTests(unittest.TestCase):
 
     def test_obstacle_blocks_segment(self):
         world = WorldMap("blocked", self.config.bounds_m, [Box(8, 12, 0, 10, 0, 10)], 0.0)
-        self.assertFalse(world.segment_free((0, 5, 5), (20, 5, 5), sample_count=10))
+        self.assertFalse(world.segment_free((0, 5, 5), (20, 5, 5)))
 
     def test_segment_cannot_tunnel_between_collision_samples(self):
         world = WorldMap(
@@ -47,30 +46,9 @@ class MultiCriteriaExperimentTests(unittest.TestCase):
             [Box(9.9, 10.1, 0, 10, 0, 10)],
             0.0,
         )
-        self.assertFalse(world.segment_free((0, 5, 5), (20, 5, 5), sample_count=1))
-        self.assertTrue(world.segment_free((0, 20, 5), (20, 20, 5), sample_count=1))
+        self.assertFalse(world.segment_free((0, 5, 5), (20, 5, 5)))
+        self.assertTrue(world.segment_free((0, 20, 5), (20, 20, 5)))
 
-    def test_smoothing_preserves_collision_free_path(self):
-        world = WorldMap("empty", self.config.bounds_m, [], 0.0)
-        points = [(0.0, 0.0, 0.0), (10.0, 0.0, 0.0), (10.0, 10.0, 0.0)]
-        smoothed = smooth_path(points, world, self.config)
-        self.assertTrue(world.polyline_free(smoothed, sample_count=5))
-        self.assertGreaterEqual(len(smoothed), 2)
-        metrics = polyline_metrics(smoothed, self.config)
-        self.assertTrue(math.isfinite(metrics.normalized_criterion))
-
-    def test_polyline_minimum_turn_radius_detects_sharp_corner(self):
-        sharp = [(0.0, 0.0, 0.0), (5.0, 0.0, 0.0), (5.0, 5.0, 0.0)]
-        straight = [(0.0, 0.0, 0.0), (5.0, 0.0, 0.0), (10.0, 0.0, 0.0)]
-        straight_with_vertical = [
-            (0.0, 0.0, 0.0),
-            (0.0, 5.0, 0.0),
-            (0.0, 5.0, 5.0),
-            (0.0, 10.0, 5.0),
-        ]
-        self.assertLess(minimum_polyline_turn_radius(sharp), 15.0)
-        self.assertTrue(math.isinf(minimum_polyline_turn_radius(straight)))
-        self.assertTrue(math.isinf(minimum_polyline_turn_radius(straight_with_vertical)))
 
     def test_wilcoxon_direction(self):
         result = wilcoxon_greater([1, 2, 3, 4, 5])
@@ -86,7 +64,7 @@ class MultiCriteriaExperimentTests(unittest.TestCase):
             "pair_id": 0,
             "status": "ok",
             "course_change_rad": 2.0,
-            "curvature_integral_inv_m": 2.0,
+            "heading_penalty_inv_m": 2.0,
             "normalized_criterion": 2.0,
             "runtime_s": 2.0,
             "expanded": 20,

@@ -1,4 +1,4 @@
-"""Analyze a new full run without changing its postprocessing or timings."""
+"""Compute summary statistics and paired comparisons for a completed experiment."""
 from __future__ import annotations
 import argparse
 import json

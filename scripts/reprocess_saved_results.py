@@ -1,4 +1,4 @@
-"""Revise postprocessing and analysis without rerunning the four A* searches."""
+"""Smooth stored A* paths and compute paired comparisons."""
 from __future__ import annotations
 
 import argparse
@@ -50,7 +50,7 @@ def paired_effects(rows, repetitions=10000, seed=20261014):
     comparisons += [("Astar-L", "Astar-L-S"), ("Astar-L-Psi-K", "Astar-L-S")]
     output = []
     for baseline, candidate in comparisons:
-        for metric in ("length_m", "course_change_rad", "curvature_integral_inv_m", "normalized_criterion"):
+        for metric in ("length_m", "course_change_rad", "heading_penalty_inv_m", "normalized_criterion"):
             strata = []
             for name in sorted({k[0] for k in keys}):
                 values = [(float(lookup[(name, i, baseline)][metric]), float(lookup[(name, i, candidate)][metric]))
@@ -91,8 +91,8 @@ def holm(rows):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source", default="results/full_300")
-    parser.add_argument("--output", default="results/reviewed_300")
+    parser.add_argument("--source", default="results/search_300")
+    parser.add_argument("--output", default="output/processed_300")
     parser.add_argument("--samples", type=int, default=16)
     parser.add_argument("--bootstrap", type=int, default=10000)
     args = parser.parse_args()
@@ -108,14 +108,14 @@ def main():
     map_dict = json.loads((source / "maps.json").read_text())
     worlds = {name: WorldMap(name, tuple(m["bounds"]), [Box(**b) for b in m["obstacles"]], m["safety_clearance"])
               for name, m in map_dict.items()}
-    archived_rows = read_csv(source / "raw_runs.csv")
+    source_rows = read_csv(source / "raw_runs.csv")
     rows = []
-    for row in archived_rows:
+    for row in source_rows:
         if row["method"] == "Astar-L-S":
             continue
         rows.append({**row, "search_runtime_s": row["runtime_s"], "postprocess_runtime_s": "",
                      "retained_edges": "", "accepted_quintic_edges": "", "rejected_quintic_edges": ""})
-    lookup = {(r["map"], int(r["pair_id"]), r["method"]): r for r in archived_rows}
+    lookup = {(r["map"], int(r["pair_id"]), r["method"]): r for r in source_rows}
     planners = {name: AStarPlanner(world, config) for name, world in worlds.items()}
     records, diagnostics, sensitivity = [], [], []
     with gzip.open(source / "paths.ndjson.gz", "rt", encoding="utf-8") as stream:
@@ -176,14 +176,14 @@ def main():
             stream.write(json.dumps(r) + "\n")
     for name in ("maps.json", "pairs.csv", "resolved_config.json"):
         (output / name).write_bytes((source / name).read_bytes())
-    metadata = {"source": str(source), "source_search_runs_retained": 1200,
-                "postprocessing_runs_recomputed": 300, "quintic_samples": args.samples,
+    metadata = {"source": str(source), "source_search_runs_retained": len(source_rows),
+                "postprocessing_runs_recomputed": len(diagnostics), "quintic_samples": args.samples,
                 "bootstrap_repetitions": args.bootstrap, "bootstrap_seed": 20261014,
                 "python": sys.version, "platform": platform.platform(),
-                "timing_note": "Archived search and current postprocessing timings are not pooled; total smoothed runtime is unavailable.",
+                "timing_note": "Search and smoothing timings were measured in separate runs; total runtime is unavailable.",
                 "source_sha256": {name: hashlib.sha256((source / name).read_bytes()).hexdigest()
                                   for name in ("raw_runs.csv", "paths.ndjson.gz", "maps.json", "pairs.csv")}}
-    (output / "review_metadata.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8")
+    (output / "processing_metadata.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps({"rows": len(rows), "paths": len(records), "accepted_quintic_edges": sum(r["accepted_quintic_edges"] for r in diagnostics),
                       "paths_with_quintic_edges": sum(r["accepted_quintic_edges"] > 0 for r in diagnostics)}, indent=2))
 

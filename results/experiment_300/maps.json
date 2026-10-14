@@ -1,0 +1,411 @@
+{
+  "simple": {
+    "name": "simple",
+    "bounds": [
+      250.0,
+      250.0,
+      100.0
+    ],
+    "safety_clearance": 5.0,
+    "obstacles": [
+      {
+        "xmin": 25,
+        "xmax": 50,
+        "ymin": 165,
+        "ymax": 225,
+        "zmin": 0,
+        "zmax": 90
+      },
+      {
+        "xmin": 80,
+        "xmax": 110,
+        "ymin": 90,
+        "ymax": 140,
+        "zmin": 0,
+        "zmax": 50
+      },
+      {
+        "xmin": 145,
+        "xmax": 180,
+        "ymin": 15,
+        "ymax": 65,
+        "zmin": 0,
+        "zmax": 20
+      },
+      {
+        "xmin": 200,
+        "xmax": 230,
+        "ymin": 15,
+        "ymax": 65,
+        "zmin": 0,
+        "zmax": 20
+      },
+      {
+        "xmin": 210,
+        "xmax": 235,
+        "ymin": 110,
+        "ymax": 185,
+        "zmin": 0,
+        "zmax": 75
+      }
+    ]
+  },
+  "complex": {
+    "name": "complex",
+    "bounds": [
+      250.0,
+      250.0,
+      100.0
+    ],
+    "safety_clearance": 5.0,
+    "obstacles": [
+      {
+        "xmin": 80,
+        "xmax": 100,
+        "ymin": 180,
+        "ymax": 200,
+        "zmin": 0,
+        "zmax": 60
+      },
+      {
+        "xmin": 10,
+        "xmax": 35,
+        "ymin": 185,
+        "ymax": 200,
+        "zmin": 0,
+        "zmax": 20
+      },
+      {
+        "xmin": 145,
+        "xmax": 170,
+        "ymin": 235,
+        "ymax": 245,
+        "zmin": 0,
+        "zmax": 40
+      },
+      {
+        "xmin": 235,
+        "xmax": 245,
+        "ymin": 75,
+        "ymax": 85,
+        "zmin": 0,
+        "zmax": 20
+      },
+      {
+        "xmin": 180,
+        "xmax": 190,
+        "ymin": 55,
+        "ymax": 80,
+        "zmin": 0,
+        "zmax": 60
+      },
+      {
+        "xmin": 45,
+        "xmax": 75,
+        "ymin": 100,
+        "ymax": 130,
+        "zmin": 0,
+        "zmax": 70
+      },
+      {
+        "xmin": 145,
+        "xmax": 155,
+        "ymin": 195,
+        "ymax": 220,
+        "zmin": 0,
+        "zmax": 70
+      },
+      {
+        "xmin": 140,
+        "xmax": 150,
+        "ymin": 145,
+        "ymax": 160,
+        "zmin": 0,
+        "zmax": 50
+      },
+      {
+        "xmin": 205,
+        "xmax": 230,
+        "ymin": 45,
+        "ymax": 60,
+        "zmin": 0,
+        "zmax": 20
+      },
+      {
+        "xmin": 110,
+        "xmax": 135,
+        "ymin": 50,
+        "ymax": 75,
+        "zmin": 0,
+        "zmax": 40
+      },
+      {
+        "xmin": 75,
+        "xmax": 85,
+        "ymin": 65,
+        "ymax": 75,
+        "zmin": 0,
+        "zmax": 40
+      },
+      {
+        "xmin": 10,
+        "xmax": 20,
+        "ymin": 40,
+        "ymax": 55,
+        "zmin": 0,
+        "zmax": 20
+      },
+      {
+        "xmin": 45,
+        "xmax": 60,
+        "ymin": 65,
+        "ymax": 85,
+        "zmin": 0,
+        "zmax": 70
+      },
+      {
+        "xmin": 175,
+        "xmax": 190,
+        "ymin": 205,
+        "ymax": 215,
+        "zmin": 0,
+        "zmax": 40
+      },
+      {
+        "xmin": 15,
+        "xmax": 25,
+        "ymin": 130,
+        "ymax": 150,
+        "zmin": 0,
+        "zmax": 50
+      },
+      {
+        "xmin": 185,
+        "xmax": 215,
+        "ymin": 150,
+        "ymax": 160,
+        "zmin": 0,
+        "zmax": 70
+      },
+      {
+        "xmin": 170,
+        "xmax": 180,
+        "ymin": 15,
+        "ymax": 30,
+        "zmin": 0,
+        "zmax": 70
+      },
+      {
+        "xmin": 110,
+        "xmax": 125,
+        "ymin": 95,
+        "ymax": 110,
+        "zmin": 0,
+        "zmax": 40
+      }
+    ]
+  },
+  "labyrinth": {
+    "name": "labyrinth",
+    "bounds": [
+      250.0,
+      250.0,
+      100.0
+    ],
+    "safety_clearance": 5.0,
+    "obstacles": [
+      {
+        "xmin": 35,
+        "xmax": 45,
+        "ymin": 0,
+        "ymax": 20,
+        "zmin": 0,
+        "zmax": 45
+      },
+      {
+        "xmin": 35,
+        "xmax": 45,
+        "ymin": 50,
+        "ymax": 250.0,
+        "zmin": 0,
+        "zmax": 45
+      },
+      {
+        "xmin": 70,
+        "xmax": 80,
+        "ymin": 0,
+        "ymax": 190,
+        "zmin": 0,
+        "zmax": 50
+      },
+      {
+        "xmin": 70,
+        "xmax": 80,
+        "ymin": 220,
+        "ymax": 250.0,
+        "zmin": 0,
+        "zmax": 50
+      },
+      {
+        "xmin": 105,
+        "xmax": 115,
+        "ymin": 0,
+        "ymax": 20,
+        "zmin": 0,
+        "zmax": 55
+      },
+      {
+        "xmin": 105,
+        "xmax": 115,
+        "ymin": 50,
+        "ymax": 250.0,
+        "zmin": 0,
+        "zmax": 55
+      },
+      {
+        "xmin": 140,
+        "xmax": 150,
+        "ymin": 0,
+        "ymax": 190,
+        "zmin": 0,
+        "zmax": 60
+      },
+      {
+        "xmin": 140,
+        "xmax": 150,
+        "ymin": 220,
+        "ymax": 250.0,
+        "zmin": 0,
+        "zmax": 60
+      },
+      {
+        "xmin": 175,
+        "xmax": 185,
+        "ymin": 0,
+        "ymax": 20,
+        "zmin": 0,
+        "zmax": 45
+      },
+      {
+        "xmin": 175,
+        "xmax": 185,
+        "ymin": 50,
+        "ymax": 250.0,
+        "zmin": 0,
+        "zmax": 45
+      },
+      {
+        "xmin": 210,
+        "xmax": 220,
+        "ymin": 0,
+        "ymax": 190,
+        "zmin": 0,
+        "zmax": 50
+      },
+      {
+        "xmin": 210,
+        "xmax": 220,
+        "ymin": 220,
+        "ymax": 250.0,
+        "zmin": 0,
+        "zmax": 50
+      },
+      {
+        "xmin": 0,
+        "xmax": 195,
+        "ymin": 45,
+        "ymax": 55,
+        "zmin": 0,
+        "zmax": 55
+      },
+      {
+        "xmin": 225,
+        "xmax": 250.0,
+        "ymin": 45,
+        "ymax": 55,
+        "zmin": 0,
+        "zmax": 55
+      },
+      {
+        "xmin": 0,
+        "xmax": 30,
+        "ymin": 85,
+        "ymax": 95,
+        "zmin": 0,
+        "zmax": 60
+      },
+      {
+        "xmin": 60,
+        "xmax": 250.0,
+        "ymin": 85,
+        "ymax": 95,
+        "zmin": 0,
+        "zmax": 60
+      },
+      {
+        "xmin": 0,
+        "xmax": 195,
+        "ymin": 125,
+        "ymax": 135,
+        "zmin": 0,
+        "zmax": 65
+      },
+      {
+        "xmin": 225,
+        "xmax": 250.0,
+        "ymin": 125,
+        "ymax": 135,
+        "zmin": 0,
+        "zmax": 65
+      },
+      {
+        "xmin": 0,
+        "xmax": 30,
+        "ymin": 165,
+        "ymax": 175,
+        "zmin": 0,
+        "zmax": 55
+      },
+      {
+        "xmin": 60,
+        "xmax": 250.0,
+        "ymin": 165,
+        "ymax": 175,
+        "zmin": 0,
+        "zmax": 55
+      },
+      {
+        "xmin": 0,
+        "xmax": 195,
+        "ymin": 205,
+        "ymax": 215,
+        "zmin": 0,
+        "zmax": 60
+      },
+      {
+        "xmin": 225,
+        "xmax": 250.0,
+        "ymin": 205,
+        "ymax": 215,
+        "zmin": 0,
+        "zmax": 60
+      },
+      {
+        "xmin": 0,
+        "xmax": 30,
+        "ymin": 235,
+        "ymax": 245,
+        "zmin": 0,
+        "zmax": 65
+      },
+      {
+        "xmin": 60,
+        "xmax": 250.0,
+        "ymin": 235,
+        "ymax": 245,
+        "zmin": 0,
+        "zmax": 65
+      }
+    ]
+  }
+}
